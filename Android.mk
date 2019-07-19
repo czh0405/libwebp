@@ -1,6 +1,8 @@
+# ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=./Android.mk
+
 LOCAL_PATH := $(call my-dir)
 
-WEBP_CFLAGS := -Wall -DANDROID -DHAVE_MALLOC_H -DHAVE_PTHREAD -DWEBP_USE_THREAD
+WEBP_CFLAGS := -Wall -DANDROID -DHAVE_MALLOC_H -DHAVE_PTHREAD -DWEBP_USE_THREAD -std=c99
 WEBP_CFLAGS += -fvisibility=hidden
 
 ifeq ($(APP_OPTIM),release)
@@ -27,8 +29,8 @@ ifneq ($(findstring armeabi-v7a, $(TARGET_ARCH_ABI)),)
   # instructions to be generated for armv7a code. Instead target the neon code
   # specifically.
   NEON := c.neon
-  USE_CPUFEATURES := yes
-  WEBP_CFLAGS += -DHAVE_CPU_FEATURES_H
+  # USE_CPUFEATURES := yes
+  # WEBP_CFLAGS += -DHAVE_CPU_FEATURES_H
 else
   NEON := c
 endif
